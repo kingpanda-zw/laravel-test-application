@@ -1,0 +1,73 @@
+<?php
+
+namespace App\Http\Livewire\Category;
+
+use Livewire\Component;
+use App\Models\ProductCategory;
+use Illuminate\Support\Facades\Auth;
+
+class Show extends Component
+{
+    public $message;
+    public $searchTerm;
+    public $categories;
+
+    public $name, $category_id, $category;
+    public $viewCategory = false;
+
+    /**
+     * Indicates if user deletion is being confirmed.
+     *
+     * @var bool
+     */
+    public $confirmingCategoryDeletion = false;
+
+    public function render()
+    {
+        $searchTerm = '%' . $this->searchTerm . '%';
+        $this->categories = ProductCategory::where('name', 'like', $searchTerm)->get();
+
+        return view('livewire.category.show');
+    }
+
+    public function viewCategory($id){
+
+        $category = ProductCategory::findOrFail($id);
+        $this->category_id = $id;
+        $this->name = $category->name;
+        $this->viewCategory = true;
+
+    }
+
+    public function cancelUpdate(){
+
+        return $this->resetForm();
+
+    }
+
+    public function resetForm(){
+
+        $this->category_id = '';
+        $this->name = '';
+        $this->viewCategory = false;
+
+    }
+
+    public function update(){
+
+        $validatedCategory = $this->validate([
+            'category_id' => 'required|numeric',
+            'name' => "required|string|unique:product_categories,name,$this->name,name",
+        ]);
+
+        $validatedCategory['created_by'] = Auth::user()->id;
+
+        $category = ProductCategory::find($this->category_id);
+        $category->update($validatedCategory);
+  
+        session()->flash('message', 'Product Category Updated Successfully.');
+  
+        $this->resetForm();
+
+    }
+}
