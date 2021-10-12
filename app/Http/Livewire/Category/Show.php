@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Category;
 use Livewire\Component;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class Show extends Component
 {
@@ -20,7 +21,7 @@ class Show extends Component
      *
      * @var bool
      */
-    public $confirmingCategoryDeletion = false;
+    public $confirmingCategory;
 
     public function render()
     {
@@ -61,6 +62,7 @@ class Show extends Component
         ]);
 
         $validatedCategory['created_by'] = Auth::user()->id;
+        $validatedCategory['slug'] = Str::slug($validatedCategory['name'], '-');
 
         $category = ProductCategory::find($this->category_id);
         $category->update($validatedCategory);
@@ -69,5 +71,20 @@ class Show extends Component
   
         $this->resetForm();
 
+    }
+
+    public function confirmDelete($id){
+        $this->confirmingCategory = $id;
+    }
+
+    public function cancelDelete($id){
+        $this->confirmingCategory = "";
+    }
+
+    public function deleteCategory($id){
+
+        ProductCategory::find($id)->delete();
+
+        session()->flash('message', 'Product Category Deleted Successfully.');
     }
 }

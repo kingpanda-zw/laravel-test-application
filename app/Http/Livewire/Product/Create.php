@@ -7,13 +7,14 @@ use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class Create extends Component
 {
     use WithFileUploads;
 
     public $product_categories;
-    public $name, $price, $product_id, $product_category_id;
+    public $name, $price, $product_id, $description, $product_category_id;
     public $image;
 
     public function render()
@@ -28,11 +29,13 @@ class Create extends Component
             'name' => "required|string|unique:products,name",
             'image' => "required|image|mimes:jpeg,png,jpg,gif,svg|max:10000",
             'price' => "required|numeric",
+            'description' => "required|string|max:200",
             'product_category_id' => "required|exists:product_categories,id"
         ]);
 
         $filename = $this->image->store('product-images', 'public');
 
+        $validatedProduct['slug'] = Str::slug($validatedProduct['name'], '-');
         $validatedProduct['image'] = $filename;
         $validatedProduct['created_by'] = Auth::user()->id;
 
@@ -48,5 +51,6 @@ class Create extends Component
         $this->name = '';
         $this->price = '';
         $this->image = '';
+        $this->description = '';
     }
 }

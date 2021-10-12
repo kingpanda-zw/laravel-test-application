@@ -60,6 +60,19 @@
         </div>
         <div class="md:flex md:items-center mb-10">
             <div class="md:w-2/12">
+                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-product-name">
+                    Product Description
+                </label>
+            </div>
+            <div class="md:w-8/12">
+                <textarea
+                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-900"
+                    id="inline-product-name" type="text" placeholder="Product Description" wire:model="description" rows="5"></textarea>
+                @error('description') <span class="text-red-500 py-2">{{ $message }}</span>@enderror
+            </div>
+        </div>
+        <div class="md:flex md:items-center mb-10">
+            <div class="md:w-2/12">
                 <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
                     for="inline-product-image">
                     Product Image

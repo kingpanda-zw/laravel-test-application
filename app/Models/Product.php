@@ -13,6 +13,8 @@ class Product extends Model
 
         'product_category_id',
         'name',
+        'slug',
+        'description',
         'image',
         'price',
         'created_by',
@@ -23,5 +25,10 @@ class Product extends Model
 
         return $this->belongsTo('App\Models\ProductCategory');
 
+    }
+
+    public function customer_orders(){
+
+        return $this->hasMany('App\Models\CustomerOrder');
     }
 }

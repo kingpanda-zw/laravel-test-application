@@ -1,7 +1,7 @@
 <div class="px-4 py-6">
     <h1 class="font-semibold text-xl tracking-tight"> List of all Products
         <a href="{{ route('products.create') }}"
-            class="bg-white text-sm float-right bg-gray-900 hover:bg-gray-700 text-white font-semibold py-2 px-4 border border-gray-900 rounded shadow inset-y-0.right-0">
+            class="text-sm float-right bg-gray-900 hover:bg-gray-700 text-white font-semibold py-2 px-4 border border-gray-900 rounded shadow inset-y-0.right-0">
             Add New Product
         </a>
     </h1>
@@ -59,6 +59,20 @@
                     </div>
                     @error('product_category_id') <span class="text-red-500 py-2">{{ $message }}</span>@enderror
                 </div>
+            </div>
+        </div>
+        
+        <div class="md:flex md:items-center mb-10">
+            <div class="md:w-2/12">
+                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-product-name">
+                    Product Description
+                </label>
+            </div>
+            <div class="md:w-8/12">
+                <textarea
+                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-900"
+                    id="inline-product-name" type="text" placeholder="Product Description" wire:model="description" rows="5"></textarea>
+                @error('description') <span class="text-red-500 py-2">{{ $message }}</span>@enderror
             </div>
         </div>
         <div class="md:flex md:items-center mb-10">
@@ -135,6 +149,11 @@
                     id="inline-product-name" type="text" placeholder="Search Here..." wire:model="searchTerm">
             </div>
         </div>
+        <div wire:loading class="w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50">
+            <span class="text-green-500 opacity-95 top-1/2 my-0 mx-auto block relative w-0 h-0" style="top: 50%;">
+                <i class="fas fa-circle-notch fa-spin fa-5x"></i>
+            </span>
+        </div>
     </div>
     <table class="table-auto" style="width: 100%;">
         <thead>
@@ -142,6 +161,7 @@
                 <th class="px-4 py-3 text-left">ID</th>
                 <th class="px-4 py-3 text-left">Image</th>
                 <th class="px-4 py-3 text-left">Product Name</th>
+                <th class="px-4 py-3 text-left">Slug</th>
                 <th class="px-4 py-3 text-left">Price</th>
                 <th class="px-4 py-3 text-left">Product Category</th>
                 <th class="px-4 py-3 text-left">Date Created</th>
@@ -160,19 +180,41 @@
                     </div>
                 </td>
                 <td class="border px-4 py-2">{{ $product->name }}</td>
+                <td class="border px-4 py-2">{{ $product->slug }}</td>
                 <td class="border px-4 py-2">{{ $product->price }}</td>
                 <td class="border px-4 py-2">{{ $product->product_category->name }}</td>
                 <td class="border px-4 py-2">{{ date('d-m-Y h:i A', strtotime($product->created_at)) }}</td>
                 <td class="border px-4 py-2 text-center">
                     <div class="inline-flex">
-                        <button wire:click="viewProduct({{$product->id}})"
-                            class="bg-gray-900 hover:bg-gray-700 text-white font-bold py-1 px-4 rounded-l">
-                            View
-                        </button>
-                        <button wire:click="confirmProductDeletion({{ $product->id }})"
-                            class="bg-red-600 hover:bg-red-500 text-white font-bold py-1 px-4 rounded-r">
-                            Delete
-                        </button>
+                        @if ($confirmingProduct === $product->id)
+                            <div class="grid grid-rows-2">
+                                <span class="text-red font-bold py-1 px-4">
+                                    Are you Sure?
+                                </span>
+                                <div>
+                                    <button wire:click="deleteProduct({{ $product->id }})"
+                                        wire:loading.attr="disabled"
+                                        class="bg-green-600 hover:bg-green-500 text-white font-bold py-1 px-4 rounded-l">
+                                        &#10003;
+                                    </button>
+                                    <button wire:click="cancelDelete({{ $product->id }})"
+                                        wire:loading.attr="disabled"
+                                        class="bg-black hover:bg-gray-900 text-white font-bold py-1 px-4 rounded-r">
+                                        &#10005;
+                                    </button>
+                                </div>
+                            </div>
+                            @else
+                                <button wire:click="viewProduct({{ $product->id }})"
+                                    class="bg-gray-900 hover:bg-gray-700 text-white font-bold py-1 px-4 rounded-l">
+                                    Edit
+                                </button>
+                                <button wire:click="confirmDelete({{ $product->id }})"
+                                    wire:loading.attr="disabled"
+                                    class="bg-red-600 hover:bg-red-500 text-white font-bold py-1 px-4 rounded-r">
+                                    Delete
+                                </button>
+                        @endif
                     </div>
                 </td>
             </tr>
@@ -182,44 +224,3 @@
     @endif
 
 </div>
-
-@if($confirmingProductDeletion)
-<div
-	class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
->
-	<div class="mt-3 text-center">
-		<div
-			class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100"
-		>
-			<svg
-				class="h-6 w-6 text-green-600"
-				fill="none"
-				stroke="currentColor"
-				viewBox="0 0 24 24"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M5 13l4 4L19 7"
-				></path>
-			</svg>
-		</div>
-		<h3 class="text-lg leading-6 font-medium text-gray-900">Successful!</h3>
-		<div class="mt-2 px-7 py-3">
-			<p class="text-sm text-gray-500">
-				Account has been successfully registered!
-			</p>
-		</div>
-		<div class="items-center px-4 py-3">
-			<button
-				id="ok-btn"
-				class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
-			>
-				OK
-			</button>
-		</div>
-	</div>
-</div>
-@endif

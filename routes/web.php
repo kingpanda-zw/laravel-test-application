@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerOrderController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -15,18 +16,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\SiteController::class, 'welcome'])->name('home');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/product/{name}', [App\Http\Controllers\SiteController::class, 'product_details'])->name('product-details');
+
+Route::get('/product-category/{name}', [App\Http\Controllers\SiteController::class, 'product_category'])->name('product-category');
+
+Route::get('/success-payment/{order_id}', [App\Http\Controllers\SiteController::class, 'success_payment'])->name('success-payment');
+
+Route::get('/failed-payment/{order_id}', [App\Http\Controllers\SiteController::class, 'failed_payment'])->name('failed-payment');
 
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
-    Route::resource('product-categories', App\Http\Controllers\ProductCategoryController::class);
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+
+    Route::resource('dashboard', App\Http\Controllers\DashboardController::class);
+    Route::resource('product-categories', ProductCategoryController::class);
     Route::resource('products', ProductController::class);
-
+    Route::resource('customer-orders', CustomerOrderController::class);
 });

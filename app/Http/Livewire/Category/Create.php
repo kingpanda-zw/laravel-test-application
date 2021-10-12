@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Category;
 use Livewire\Component;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class Create extends Component
 {
@@ -21,6 +22,7 @@ class Create extends Component
             'name' => "required|string|unique:product_categories,name",
         ]);
 
+        $validatedCategory['slug'] = Str::slug($validatedCategory['name'], '-');
         $validatedCategory['created_by'] = Auth::user()->id;
 
         ProductCategory::create($validatedCategory);

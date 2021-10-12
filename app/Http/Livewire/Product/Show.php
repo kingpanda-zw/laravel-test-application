@@ -7,6 +7,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use Illuminate\Support\Str;
 
 class Show extends Component
 {
@@ -16,12 +17,12 @@ class Show extends Component
     public $searchTerm;
     public $products;
 
-    public $name, $price, $product_category_id, $product;
+    public $name, $price, $description, $product_category_id, $product;
     public $image;
     public $viewProduct = false;
 
 
-    public $confirmingProductDeletion = false;
+    public $confirmingProduct;
 
     public function render()
     {
@@ -41,6 +42,7 @@ class Show extends Component
         $this->name = $product->name;
         $this->price = $product->price;
         $this->image = $product->image;
+        $this->description = $product->description;
         $this->product_category_id = $product->product_category->id;
         $this->viewProduct = true;
 
@@ -52,11 +54,12 @@ class Show extends Component
 
     }
 
-    public function confirmProductDeletion($id){
+    public function confirmDelete($id){
+        $this->confirmingProduct = $id;
+    }
 
-        $this->confirmingProductDeletion = true;
-        $this->product_id = $id;
-
+    public function cancelDelete($id){
+        $this->confirmingProduct = "";
     }
 
     public function resetForm(){
@@ -65,6 +68,7 @@ class Show extends Component
         $this->name = '';
         $this->price = '';
         $this->image = '';
+        $this->description = '';
         $this->product_category_id = '';
         $this->viewProduct = false;
 
@@ -75,13 +79,14 @@ class Show extends Component
         if(!is_string($this->image)){
 
             $validatedProduct = $this->validate([
-                'product_category_id' => 'required|exists|product_categories,id',
+                'product_category_id' => 'required|exists:product_categories,id',
                 'product_id' => 'required|numeric',
                 'name' => "required|string|unique:products,name,$this->name,name",
                 'image' => "image|mimes:jpeg,png,jpg,gif,svg|max:10000",
-                'price' => "required|numeric"
+                'price' => "required|numeric",
+                'description' => "required|string|max:200",
             ]);
-
+            
             $filename = $this->image->store('product-images', 'public');
             $validatedProduct['image'] = $filename;
 
@@ -90,10 +95,12 @@ class Show extends Component
             $validatedProduct = $this->validate([
                 'product_category_id' => 'required|numeric',
                 'name' => "required|string|unique:products,name,$this->name,name",
-                'price' => "required|string"
+                'price' => "required|string",
+                'description' => "required|string|max:200",
             ]);
 
         }
+        $validatedProduct['slug'] = Str::slug($validatedProduct['name'], '-');
         $validatedProduct['created_by'] = Auth::user()->id;
 
         $product = Product::find($this->product_id);
@@ -105,9 +112,9 @@ class Show extends Component
 
     }
 
-    public function delete(){
+    public function deleteProduct($id){
 
-        Product::find($this->product_id)->delete();
+        Product::find($id)->delete();
 
         session()->flash('message', 'Product Deleted Successfully.');
     }

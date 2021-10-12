@@ -13,17 +13,31 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('product_category_id');
-            $table->string('name');
-            $table->string('image');
-            $table->string('price');
-            $table->unsignedBigInteger('created_by');
-            $table->timestamps();
+        if (!Schema::hasTable('products')) {
+            Schema::create('products', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedBigInteger('product_category_id');
+                $table->string('name');
+                $table->string('image');
+                $table->string('price');
+                $table->unsignedBigInteger('created_by');
+                $table->timestamps();
 
-            $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade');
-        });
+                $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade');
+            });
+        }
+
+        if (!Schema::hasColumn('products', 'slug')) {
+            Schema::table('products', function (Blueprint $table) {
+                $table->string('slug');
+            });
+        }
+
+        if (!Schema::hasColumn('products', 'description')) {
+            Schema::table('products', function (Blueprint $table) {
+                $table->text('description')->nullable();
+            });
+        }
     }
 
     /**
