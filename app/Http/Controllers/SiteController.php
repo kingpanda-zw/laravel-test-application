@@ -16,7 +16,7 @@ class SiteController extends Controller
     public function welcome()
     {
         $categories = ProductCategory::limit(3)->get();
-        $first_index = $categories->first()->id;
+        $first_index = is_object($categories) ? $categories->first()->id: '';
         $products = Product::all();
         return view('welcome', compact('categories', 'first_index', 'products'));
     }
