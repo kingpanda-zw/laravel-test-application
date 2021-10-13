@@ -14,16 +14,14 @@ use Stripe\Exception\ApiErrorException;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 
-class Checkout extends Component
+class CheckoutDeposit extends Component
 {
-
     public $email, $name_on_card, $product_name, $product_price;
 
     public function render()
     {
-        return view('livewire.checkout');
+        return view('livewire.checkout-deposit');
     }
-
 
     public function createSession(Request $request, Response $response)
     {

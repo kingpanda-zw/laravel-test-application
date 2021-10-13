@@ -142,10 +142,9 @@
 
                 <section aria-labelledby="options-heading" class="mt-10">
 
-                    <form>
-                        
-                        <a href="#checkout1" rel="modal:open"
-                            class="mt-6 w-1/2 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Buy</a>
+                    <form>  
+                        <a href="#checkout1" rel="modal:open" class="mt-6 w-1/2 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Buy</a>
+                        <a href="#checkout2" rel="modal:open" class="mt-6 w-1/2 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Deposit then Payment</a>
                     </form>
                 </section>
             </div>

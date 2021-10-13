@@ -25,8 +25,8 @@ class SendEmail implements ShouldQueue
     public function __construct($email, $order_id)
     {
         //
-        $this->email;
-        $this->order_id;
+        $this->email = $email;
+        $this->order_id = $order_id;
         
     }
 

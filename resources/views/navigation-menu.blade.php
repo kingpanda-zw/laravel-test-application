@@ -24,6 +24,9 @@
                     <x-jet-nav-link href="{{ route('customer-orders.index') }}" :active="request()->routeIs('customer-orders.index')">
                         {{ __('Customer Orders') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('customer-deposit-orders.index') }}" :active="request()->routeIs('customer-deposit-orders.index')">
+                        {{ __('Customer Deposit Orders') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 

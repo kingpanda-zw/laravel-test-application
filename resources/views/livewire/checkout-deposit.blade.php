@@ -1,5 +1,5 @@
 <div id="checkout1" class="modal p-2 py-10 sm:p-28" wire:ignore.self>
-    <h1 class="font-bold text-center text-xl md:text-4xl p-5">Checkout</h1>
+    <h1 class="font-bold text-center text-xl md:text-4xl p-5">Checkout (Deposit then Payment)</h1>
     {{-- <hr class="w-2/5 border-1 mt-3 mx-auto border-red-600"> --}}
     @if (session()->has('message'))
         <div class="text-center py-4 lg:px-4">
@@ -57,7 +57,7 @@
                 <button type="button"
                     class="flex mx-auto mt-6 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     wire:click.prevent="createSession()">
-                    Proceed to Payment
+                    Proceed with Payment
                 </button>
             </div>
         </div>

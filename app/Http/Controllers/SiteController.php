@@ -7,6 +7,8 @@ use App\Models\CustomerOrder;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderSuccess;
 
 class SiteController extends Controller
 {
@@ -47,6 +49,7 @@ class SiteController extends Controller
         ]);
 
         //take customer email and update order status
+
         try {
 
             SendEmail::dispatch($order->customer_email, $order->order_id);

@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\CustomerDepositPaymentController;
 use App\Http\Controllers\CustomerOrderController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
+use App\Models\CustomerDepositPayment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,4 +39,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('product-categories', ProductCategoryController::class);
     Route::resource('products', ProductController::class);
     Route::resource('customer-orders', CustomerOrderController::class);
+    Route::resource('customer-deposit-orders', CustomerDepositPaymentController::class);
 });
