@@ -94,13 +94,7 @@
                             <a href="{{ route('home') }}" :class="request()->routeIs('home') ? 'bg-gray-900' : ''"
                                 class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
                                 aria-current="page">All Products</a>
-                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                            @foreach (App\Models\ProductCategory::all() as $category)
-                                <a href="{{ url('/product-category/' . $category->slug) }}"
-                                    :class="request()->segment(2) == {{ $category->slug }} ? 'bg-gray-900' : ''"
-                                    class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
-                                    aria-current="page">{{ $category->name }}</a>
-                            @endforeach
+                            <a href="#" class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">{{ $product->name }}</a>
                         </div>
                     </div>
                 </div>
@@ -123,8 +117,8 @@
         <h2 class="py-10 lg:max-w-7xl lg:px-8 text-gray-900 text-3xl font-bold mb-2">Products Details</h2>
         <div class="mb-20 flex gap-x-10 items-start">
             <div class="w-1/3 flex-col aspect-w-2 aspect-h-3 rounded-lg bg-gray-100 overflow-hidden">
-                <img src="{{ asset('storage/'.$product->image) }}"
-                    alt="{{ $product->name }}" class="object-center object-cover">
+                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                    class="object-center object-cover">
             </div>
             <div class="w-2/3 flex-col">
                 <h2 class="text-2xl font-extrabold text-gray-900 sm:pr-12">
@@ -142,23 +136,26 @@
 
                 <section aria-labelledby="options-heading" class="mt-10">
 
-                    <form>  
-                        <a href="#checkout1" rel="modal:open" class="mt-6 w-1/2 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Buy</a>
-                        <a href="#checkout2" rel="modal:open" class="mt-6 w-1/2 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Deposit then Payment</a>
+                    <form>
+                        <a href="#checkout1" rel="modal:open"
+                            class="mt-6 w-1/2 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Buy</a>
+                        <a href="#checkout2" rel="modal:open"
+                            class="mt-6 w-1/2 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Deposit
+                            then Payment</a>
                     </form>
                 </section>
             </div>
         </div>
     </div>
 
-        
+
     @livewire('checkout')
     @livewireScripts
     <!-- Alpine.js -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
 </body>
 
