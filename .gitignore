@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
+!/vendor/livewire/src/Controllers/FileUploadHandler.php
 .env
 .env.backup
 .phpunit.result.cache
