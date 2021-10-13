@@ -6,15 +6,18 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "cartalyst/stripe-laravel": "^13.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
         "laravel/jetstream": "^2.4",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "league/flysystem-cached-adapter": "~1.0",
+        "league/flysystem-sftp": "~1.0",
         "livewire/livewire": "^2.5",
-        "stripe/stripe-php": "^7.100",
-        "cartalyst/stripe-laravel": "^13.0"
+        "stripe/stripe-php": "^7.100"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

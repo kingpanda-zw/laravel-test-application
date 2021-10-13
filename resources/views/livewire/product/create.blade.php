@@ -1,7 +1,7 @@
 <div class="px-4 py-6">
     <h1 class="font-semibold text-xl tracking-tight"> Create A New Product
         <a href="{{ route('products.index') }}"
-            class="bg-white text-sm float-right bg-gray-900 hover:bg-gray-700 text-white font-semibold py-2 px-4 border border-gray-900 rounded shadow inset-y-0.right-0">
+            class="text-sm float-right bg-gray-900 hover:bg-gray-700 text-white font-semibold py-2 px-4 border border-gray-900 rounded shadow inset-y-0.right-0">
             &laquo; Back to Products
         </a>
     </h1>

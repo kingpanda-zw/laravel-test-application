@@ -8,6 +8,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class Create extends Component
 {
@@ -33,10 +34,10 @@ class Create extends Component
             'product_category_id' => "required|exists:product_categories,id"
         ]);
 
-        $filename = $this->image->store('product-images', 'public');
+        $filename = $this->image->store('product-images', 's3');
 
         $validatedProduct['slug'] = Str::slug($validatedProduct['name'], '-');
-        $validatedProduct['image'] = $filename;
+        $validatedProduct['image'] = Storage::disk('s3')->url($filename);
         $validatedProduct['created_by'] = Auth::user()->id;
 
         Product::create($validatedProduct);
