@@ -175,7 +175,7 @@
                 <td class="border px-4 py-2">
                     <!-- Current Profile Photo -->
                     <div class="mt-2" x-show="! photoPreview">
-                        <img src="{{ $product->image }}" alt="{{ $product->name }}"
+                        <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}"
                             class="rounded-full h-10 w-10 object-cover">
                     </div>
                 </td>

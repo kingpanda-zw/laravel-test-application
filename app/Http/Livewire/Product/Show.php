@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 
 class Show extends Component
 {
@@ -87,9 +86,9 @@ class Show extends Component
                 'price' => "required|numeric",
                 'description' => "required|string|max:200",
             ]);
-            
-            $filename = $this->image->store('product-images', '3');
-            $validatedProduct['image'] = Storage::disk('s3')->url($filename);
+        
+            $filename = $this->image->store('product-images', 'public');
+            $validatedProduct['image'] = $filename;
 
         }else{
 
