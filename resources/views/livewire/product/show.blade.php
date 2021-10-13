@@ -99,15 +99,15 @@
                 </label>
             </div>
             <div class="w-8/12">
-                {{-- @if(!is_string($image))
+                @if(!is_string($image))
                 <div class="max-w-sm rounded overflow-hidden shadow-lg">
                     <img class="w-full" src="{{ $image->temporaryUrl() }}" alt="{{ $name}}">
                 </div>
-                @else --}}
+                @else
                 <div class="max-w-sm rounded overflow-hidden shadow-lg">
                     <img class="w-full" src="{{ 'storage/'.$image }}" alt="{{ $name}}">
                 </div>
-                {{-- @endif --}}
+                @endif
             </div>
         </div>
         @endif

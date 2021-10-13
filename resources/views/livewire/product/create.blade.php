@@ -85,7 +85,7 @@
                 @error('image') <span class="text-red-500 pt-4">{{ $message }}</span>@enderror
             </div>
         </div>
-{{-- 
+
         <div class="md:flex md:items-center mb-10">
             <div class="md:w-2/12">
                 <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -102,7 +102,7 @@
             </div>
             @endif
     
-        </div> --}}
+        </div>
 
         <div x-data="{ isUploading: false, progress: 0 }" x-on:livewire-upload-start="isUploading = true"
             x-on:livewire-upload-finish="isUploading = false" x-on:livewire-upload-error="isUploading = false"
