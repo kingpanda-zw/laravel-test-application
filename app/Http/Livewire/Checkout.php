@@ -58,6 +58,7 @@ class Checkout extends Component
                         'currency' => 'usd',
                         'product_data' => [
                             'name' => $product->name,
+                            'images' => [$product->image],
                         ],
                         'unit_amount' => $product->price * 100,
                     ],
