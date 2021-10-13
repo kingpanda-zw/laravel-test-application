@@ -42,6 +42,18 @@ In your *.env* make sure your setup your variables
 php artisan migrate
 ```
 
+## Create default user
+
+You need to create the default user for you to use the backend
+Run the following command
+
+```bash
+php artisan db:seed
+```
+
+The default credentials are *admin@admin.com* and *password*
+
+
 ## Running the Application
 ```bash
 php artisan serve
