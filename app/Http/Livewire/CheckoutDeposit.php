@@ -91,7 +91,7 @@ class CheckoutDeposit extends Component
                 $order = CustomerDepositPayment::where('order_id', $order_id)->first();
                 try {
 
-                    PayLater::dispatch($order->customer_email, $order->order_id)->delay(now()->addMinutes(5));
+                    PayLater::dispatch($order->customer_email, $order->order_id)->delay(now()->addMinutes(2));
                     // ->delay(now()->addMinutes(1));
 
                 } catch (\Exception $e) {

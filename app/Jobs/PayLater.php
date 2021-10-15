@@ -57,7 +57,7 @@ class PayLater implements ShouldQueue
                 'balance_status' => 'success',
                 'deposit_email_sent' => true,
             ]);
-            // we call the mail function to send email in queue
+            // we send the payment success email
             $email = new PaymentSuccess($order->order_id);
             Mail::to($this->email)->send($email);
 
