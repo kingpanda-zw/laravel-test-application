@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
                 $table->unsignedBigInteger('product_category_id');
                 $table->string('name');
                 $table->string('image');
-                $table->string('price');
+                $table->double('price');
                 $table->unsignedBigInteger('created_by');
                 $table->timestamps();
 

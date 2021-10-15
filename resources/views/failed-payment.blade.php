@@ -94,13 +94,6 @@
                             <a href="{{ route('home') }}" :class="request()->routeIs('home') ? 'bg-gray-900' : ''"
                                 class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
                                 aria-current="page">All Products</a>
-                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                            @foreach (App\Models\ProductCategory::all() as $category)
-                                <a href="{{ url('/product-category/' . $category->slug) }}"
-                                    :class="request()->segment(2) == {{ $category->slug }} ? 'bg-gray-900' : ''"
-                                    class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
-                                    aria-current="page">{{ $category->name }}</a>
-                            @endforeach
                         </div>
                     </div>
                 </div>

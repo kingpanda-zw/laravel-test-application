@@ -7,10 +7,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class OrderSuccess extends Mailable
+class OrderFailed extends Mailable
 {
     use Queueable, SerializesModels;
     public $order_id;
+
 
     /**
      * Create a new message instance.
@@ -31,6 +32,6 @@ class OrderSuccess extends Mailable
     public function build()
     {
         $order_id = $this->order_id;
-        return $this->subject('Order Success')->view('email-templates.success_payment', compact('order_id'));
+        return $this->subject('Order Failed')->view('email-templates.failed_payment', compact('order_id'));
     }
 }

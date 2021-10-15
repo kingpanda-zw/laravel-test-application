@@ -27,9 +27,10 @@
                 <th class="px-4 py-3 text-left">Price</th>
                 <th class="px-4 py-3 text-left">Deposit</th>
                 <th class="px-4 py-3 text-left">Balance</th>
-                <th class="px-4 py-3 text-left">Status</th>
-                <th class="px-4 py-3 text-left">Email Sent</th>
+                <th class="px-4 py-3 text-left">Deposit Status</th>
+                <th class="px-4 py-3 text-left">Balance Status</th>
                 <th class="px-4 py-3 text-left">Date Created</th>
+                <th class="px-4 py-3 text-left">Date Updated</th>
             </tr>
         </thead>
         <tbody>
@@ -38,12 +39,13 @@
                 <td class="border px-4 py-2">{{ $loop->index + 1}}</td>
                 <td class="border px-4 py-2">{{ $order->customer_email }}</td>
                 <td class="border px-4 py-2">{{ $order->product->name }}</td>
-                <td class="border px-4 py-2">{{ $order->product->price }}</td>
-                <td class="border px-4 py-2">{{ $order->deposit }}</td>
-                <td class="border px-4 py-2">{{ $order->balance }}</td>
-                <td class="border px-4 py-2">{{ $order->status }}</td>
-                <td class="border px-4 py-2">{{ $order->email_sent ? 'Yes': 'No' }}</td>
-                <td class="border px-4 py-2">{{ date('d-m-Y h:i A', strtotime($order->created_at)) }}</td>
+                <td class="border px-4 py-2">{{ number_format($order->product->price, 2, '.', '') }}</td>
+                <td class="border px-4 py-2">{{ number_format($order->deposit, 2, '.', '') }}</td>
+                <td class="border px-4 py-2">{{ number_format($order->balance, 2, '.', '') }}</td>
+                <td class="border px-4 py-2">{{ $order->deposit_status }}</td>
+                <td class="border px-4 py-2">{{ $order->balance_status }}</td>
+                <td class="border px-4 py-2">{{ date('d-m-Y h:i', strtotime($order->created_at)) }}</td>
+                <td class="border px-4 py-2">{{ date('d-m-Y h:i', strtotime($order->updated_at)) }}</td>
             </tr>
             @endforeach
         </tbody>

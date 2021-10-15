@@ -26,6 +26,10 @@ Route::get('/product-category/{name}', [App\Http\Controllers\SiteController::cla
 
 Route::get('/success-payment/{order_id}', [App\Http\Controllers\SiteController::class, 'success_payment'])->name('success-payment');
 
+Route::get('/deposit-successful', function() {
+    return view('success-payment');
+});
+
 Route::get('/failed-payment/{order_id}', [App\Http\Controllers\SiteController::class, 'failed_payment'])->name('failed-payment');
 
 

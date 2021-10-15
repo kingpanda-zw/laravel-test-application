@@ -94,28 +94,9 @@
                             <a href="{{ route('home') }}" :class="request()->routeIs('home') ? 'bg-gray-900' : ''"
                                 class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
                                 aria-current="page">All Products</a>
-                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                            @foreach (App\Models\ProductCategory::all() as $category)
-                                <a href="{{ url('/product-category/' . $category->slug) }}"
-                                    :class="request()->segment(2) == {{ $category->slug }} ? 'bg-gray-900' : ''"
-                                    class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
-                                    aria-current="page">{{ $category->name }}</a>
-                            @endforeach
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Mobile menu, show/hide based on menu state. -->
-        <div class="sm:hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                @foreach (App\Models\ProductCategory::all() as $category)
-                    <a href="#" :class="request()->segment(2) == {{ $category->slug }} ? 'bg-gray-900' : ''"
-                        class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                        aria-current="page">Category 1</a>
-                @endforeach
             </div>
         </div>
     </nav>

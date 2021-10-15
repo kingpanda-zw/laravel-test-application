@@ -52,7 +52,7 @@ class SiteController extends Controller
 
         try {
 
-            SendEmail::dispatch($order->customer_email, $order->order_id);
+            SendEmail::dispatch($order->customer_email, $order->order_id, false);
 
         }catch(\Exception $e){
 

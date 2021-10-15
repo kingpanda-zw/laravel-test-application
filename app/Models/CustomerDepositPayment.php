@@ -13,11 +13,14 @@ class CustomerDepositPayment extends Model
         
         'order_id',
         'customer_email',
+        'customer_id',
         'product_id',
         'deposit',
         'balance',
-        'status', 
+        'deposit_status', 
+        'balance_status',
         'email_sent',
+        'deposit_email_sent',
 
     ];
 

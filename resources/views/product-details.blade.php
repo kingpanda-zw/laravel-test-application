@@ -130,8 +130,9 @@
 
                     <p class="text-lg text-gray-900 my-5">{{ $product->description }}</p>
                     <p class="text-2xl text-gray-900">
-                        ${{ $product->price }}
+                        ${{ number_format($product->price, 2, '.', '') }}
                     </p>
+                    
                 </section>
 
                 <section aria-labelledby="options-heading" class="mt-10">
@@ -150,6 +151,7 @@
 
 
     @livewire('checkout')
+    @livewire('checkout-deposit')
     @livewireScripts
     <!-- Alpine.js -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
